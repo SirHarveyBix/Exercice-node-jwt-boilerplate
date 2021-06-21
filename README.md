@@ -353,6 +353,12 @@ app.post('/login', (req, res) => {
 
 ## 5 - Afficher la liste des utilisateurs
 
+// Sur le site suivant : http://jwtbuilder.jamiekurtz.com/
+// 
+// Générez un token avec les informations de votre choix.
+// 
+// Une fois le token créé, vérifiez que ses informations sont correcte grace au site : https://jwt.io/
+
 Créer une route en GET `/users` qui récupère la liste des utilisateurs.
 
 Si une erreur survient lors de l'exécution de la requête SQL, renvoyer une erreur 500 avec le message d'erreur correspondant.
