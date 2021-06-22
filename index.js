@@ -4,6 +4,7 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const authenticateWithJsonWebToken = require('./middleware');
 const connection = require('./database');
 
 const { SERVER_PORT, CLIENT_URL, JWT_AUTH_SECRET } = process.env;
@@ -78,12 +79,17 @@ app.post('/login', (request, response) => {
   }
 });
 
-app.get('/users', (request, response) => {
+app.get('/users', authenticateWithJsonWebToken, (request, response) => {
   connection.query('SELECT * FROM user', (error, result) => {
     if (error) {
       response.status(500).send(error.message);
     }
-    response.status(200).send(result);
+    response.status(200).send(
+      // i've got result, but havent thought about .map()
+      result.map((user) => {
+        return { ...user, password: 'hidden' };
+      })
+    );
   });
 });
 

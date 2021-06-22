@@ -496,3 +496,5 @@ app.get('/users', authenticateWithJsonWebToken, (req, res) => {
   });
 });
 ```
+
+pour recuperer le bon token : POST / login, recuperer le toker GET /user, changer le Autorisation beater @Postman
